@@ -12,6 +12,35 @@ function init (){
 
 
     var mapbox = L.tileLayer(mapbox);
+
+    var vdc= L.tileLayer.wms('http://202.45.144.203:8080/geoserver/earthquake/wms',{
+    layers: 'VDCs',
+    zoom:7.5,
+    opacity: .2,
+    transparent: true
+
+  });
+var vilname=L.tileLayer.wms('http://202.45.144.203:8080/geoserver/earthquake/wms',{
+  layers:'VIL_NAME',
+  transparent: true,
+  opacity: .2,
+    });
+
+/*var trans=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',{
+  layers:'trans_ln',
+  transparent: true,
+  opacity: .5,
+    });
+
+var hydro=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',{
+  layers:'hydro_ln',
+  transparent: true,
+  opacity: .5,
+    });*/
+
+
+
+
     
   // var pruneCluster = new PruneClusterForLeaflet();
   // var marker = new PruneCluster.Marker(latitude, longitude);
@@ -34,24 +63,33 @@ function init (){
       }).setContent(popUpContent));
   }
 
-  var damaged_buildings = new L.geoJson.ajax('damaged_buildings.geojson',{
+  var damaged_buildings = new L.geoJson.ajax('data/damaged_buildings.geojson',{
     onEachFeature : popup_show
   });
-  var road_damages = new L.geoJson.ajax('road_damaged.geojson',{
+  var road_damages = new L.geoJson.ajax('data/damaged_buildings.geojson',{
     onEachFeature : popup_show
   });
-  var major_destructions = new L.geoJson.ajax('major_destruction.geojson',{
+  var major_destructions = new L.geoJson.ajax('data/damaged_buildings.geojson',{
     onEachFeature : popup_show
   });
   // map.addLayer(pruneCluster);
   var baseLayers = {
-    "Post-Disaster Image":mapbox,
-    "OpenStreetMap": osm      
+    //"Post-Disaster Image":mapbox,
+    "OpenStreetMap": osm
+    // "SD": topodata      
   }
   var overlays = {
     "Damaged Buildings" : damaged_buildings,
     "Damaged Road" : road_damages,
-    "Major Destructions" : major_destructions
-  }
+    "Major Destructions" : major_destructions,
+    "Village Name":vilname,
+    "VDC":vdc,
+    //"Transportation":trans,
+    //"Rivers":hydro
+    }
+ 
+  
   L.control.layers(baseLayers,overlays).addTo(map);
+
+
 }
