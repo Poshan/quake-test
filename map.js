@@ -13,20 +13,20 @@ function init (){
 
     var mapbox = L.tileLayer(mapbox);
 
-    var vdc= L.tileLayer.wms('http://202.45.144.203:8080/earthquake/wms',{
-    layers: 'VDCs',
+    var vilname= L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',{
+    layers: 'villagename',
     zoom:7.5,
     opacity: .2,
     transparent: true
 
   });
-var vilname=L.tileLayer.wms('http://202.45.144.203:8080/earthquake/wms',{
-  layers:'VIL_NAME',
+var vdc=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',{
+  layers:'vdc',
   transparent: true,
   opacity: .2,
     });
 
-/*var trans=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',{
+var trans=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',{
   layers:'trans_ln',
   transparent: true,
   opacity: .5,
@@ -36,7 +36,7 @@ var hydro=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',
   layers:'hydro_ln',
   transparent: true,
   opacity: .5,
-    });*/
+    });
 
 
 
@@ -66,15 +66,15 @@ var hydro=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',
   var damaged_buildings = new L.geoJson.ajax('damaged_buildings.geojson',{
     onEachFeature : popup_show
   });
-  var road_damages = new L.geoJson.ajax('data/damaged_buildings.geojson',{
+  var road_damages = new L.geoJson.ajax('damaged_buildings.geojson',{
     onEachFeature : popup_show
   });
-  var major_destructions = new L.geoJson.ajax('data/damaged_buildings.geojson',{
+  var major_destructions = new L.geoJson.ajax('damaged_buildings.geojson',{
     onEachFeature : popup_show
   });
   // map.addLayer(pruneCluster);
   var baseLayers = {
-    //"Post-Disaster Image":mapbox,
+    "Post-Disaster Image":mapbox,
     "OpenStreetMap": osm
     // "SD": topodata      
   }
@@ -84,8 +84,8 @@ var hydro=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',
     "Major Destructions" : major_destructions,
     "Village Name":vilname,
     "VDC":vdc,
-    //"Transportation":trans,
-    //"Rivers":hydro
+    "Transportation":trans,
+    "Rivers":hydro
     }
  
   
