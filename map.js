@@ -13,14 +13,14 @@ function init (){
 
     var mapbox = L.tileLayer(mapbox);
 
-    var vdc= L.tileLayer.wms('http://202.45.144.203:8080/geoserver/earthquake/wms',{
+    var vdc= L.tileLayer.wms('http://202.45.144.203:8080/earthquake/wms',{
     layers: 'VDCs',
     zoom:7.5,
     opacity: .2,
     transparent: true
 
   });
-var vilname=L.tileLayer.wms('http://202.45.144.203:8080/geoserver/earthquake/wms',{
+var vilname=L.tileLayer.wms('http://202.45.144.203:8080/earthquake/wms',{
   layers:'VIL_NAME',
   transparent: true,
   opacity: .2,
@@ -63,7 +63,7 @@ var hydro=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',
       }).setContent(popUpContent));
   }
 
-  var damaged_buildings = new L.geoJson.ajax('data/damaged_buildings.geojson',{
+  var damaged_buildings = new L.geoJson.ajax('damaged_buildings.geojson',{
     onEachFeature : popup_show
   });
   var road_damages = new L.geoJson.ajax('data/damaged_buildings.geojson',{
