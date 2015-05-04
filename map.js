@@ -13,43 +13,68 @@ function init (){
     var osm = L.tileLayer(osmUrl, {
         attribution: osmAttribution,
         doubleClickZoom: true
-      }).addTo(map);
+      });
 
 /*
 TO-dos
 1. Add post disaster imageries
 2. Add other data (new data)
-3. cluster the markers
+3. cluster the markers /*done
 4. add description and attribution
 */
 
 
-    var vdc= L.tileLayer.wms('http://202.45.144.203:8080/geoserver/earthquake/wms',{
+var vdc= L.tileLayer.wms('http://202.45.144.203:8080/geoserver/Nepal_Earthquake/wms',{
     layers: 'VDC',
     zoom:7.5,
     opacity: .4,
-    transparent: true
+    
 
   });
-var vilname=L.tileLayer.wms('http://202.45.144.203:8080/geoserver/earthquake/wms',{
+var vilname=L.tileLayer.wms('http://202.45.144.203:8080/geoserver/Nepal_Earthquake/wms',{
   layers:'Village_name',
   transparent: true,
   opacity: .4,
 });
 
-/*var trans=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',{
-  layers:'trans_ln',
+var district=L.tileLayer.wms('http://202.45.144.203:8080/geoserver/Nepal_Earthquake/wms',{
+  layers:'district',
   transparent: true,
   opacity: .5,
-    });
+}).addTo(map);
+//new addition starts here
+var markersCluster = L.markerClusterGroup();        
+var damaged_buildings = new L.GeoJSON.AJAX("damaged_buildings.geojson", {
+    pointToLayer: function(feature, latlng) {
+        /*var icon = L.icon({
+                        iconSize: [27, 27],
+                        iconAnchor: [13, 27],
+                        popupAnchor:  [1, -24],
+                        iconUrl: 'icon.png'
+                        });*/
+        return L.marker(latlng);
+        //return L.marker(latlng, {icon: icon})
+    }, 
+    onEachFeature: function(f, l) {
+        var popUpContent = f.properties.Description;
+      l.bindPopup(L.popup({
+          closeOnClick: true,
+          closeButton: true,
+          keepInView: true,
+          autoPan: true,
+          maxHeight: 500,
+          minWidth: 500
+      }).setContent(popUpContent));
+    }
+});
+damaged_buildings.on('data:loaded', function () {
+    markersCluster.addLayer(damaged_buildings).addTo(map);
+    // console.log(markersBar);
+    // map.addLayer(damaged_buildings);
+});
+//new added ends here
 
-var hydro=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',{
-  layers:'hydro_ln',
-  transparent: true,
-  opacity: .5,
-    });*/
-
-
+/*
   damaged_buildings_cluster = L.markerClusterGroup();
 
   function popup_show(f,l){
@@ -70,35 +95,40 @@ var hydro=L.tileLayer.wms('http://localhost:8080/geoserver/NepalEarthquake/wms',
       }).setContent(popUpContent));
   }
 
+
 var damaged_buildings = new L.geoJson.ajax('damaged_buildings.geojson',{
     onEachFeature : popup_show
   });
 
-
+*/
+/*
   var road_damages = new L.geoJson.ajax('damaged_buildings.geojson',{
     onEachFeature : popup_show
   });
   var major_destructions = new L.geoJson.ajax('damaged_buildings.geojson',{
     onEachFeature : popup_show
   });
+*/
+
   // map.addLayer(pruneCluster);
   var baseLayers = {
     //"Post-Disaster Image":mapbox,
-    "OpenStreetMap": osm
+    "Districts": district
     // "SD": topodata      
   }
-   damaged_buildings_cluster.addLayer(damaged_buildings);
+
   var overlays = {
-    "Damaged Buildings" : damaged_buildings_cluster,
-    "Damaged Road" : road_damages,
-    "Major Destructions" : major_destructions,
+    "Damaged Buildings" : markersCluster,
+    /*"Damaged Road" : road_damages,
+    "Major Destructions" : major_destructions,*/
     "Village Name":vilname,
     "VDC":vdc,
+    "OpenStreetMap": osm
     //"Transportation":trans,
     //"Rivers":hydro
   }
-  map.addLayer(damaged_buildings_cluster);
-  L.control.layers(baseLayers,overlays).addTo(map);
+  // map.addLayer(damaged_buildings_cluster);
+  L.control.layers(baseLayers,overlays,{collapsed:false}).addTo(map);
   
 
 }
