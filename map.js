@@ -3,15 +3,15 @@ function init (){
   var north_east = new L.latLng(26.328231, 80.029907);
   var south_west = new L.latLng(30.605155, 88.225708);
   var bounds = new L.latLngBounds(north_east, south_west);
-   map = L.map('map').setView([27.6933, 85.5643], 9);
+   map = L.map('map').setView([27.6933, 85.5643], 10);
   
     osmUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
     mapbox = 'https://{switch:a,b,c,d}.tiles.mapbox.com/v4/mapbox.satellite-kathmandu-20150425-after/{zoom:7}/{x}/{y}.jpg?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q';
-    osmAttribution = 'Map Tiles &copy; CC BY-SA <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+    attribution = 'Map Tiles &copy; CC BY-SA <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> Vector data source: Survey Department, Crowd Sourced Points: Tomnod';
    //map.fitBounds(bounds);
 /*for osm layer*/
     var osm = L.tileLayer(osmUrl, {
-        attribution: osmAttribution,
+        attribution: attribution,
         doubleClickZoom: true
       });
 
@@ -46,14 +46,14 @@ var district=L.tileLayer.wms('http://202.45.144.203:8080/geoserver/Nepal_Earthqu
 var markersCluster = L.markerClusterGroup();        
 var damaged_buildings = new L.GeoJSON.AJAX("damaged_buildings.geojson", {
     pointToLayer: function(feature, latlng) {
-        /*var icon = L.icon({
-                        iconSize: [27, 27],
+        var icon = L.icon({
+                        iconSize: [20, 20],
                         iconAnchor: [13, 27],
                         popupAnchor:  [1, -24],
-                        iconUrl: 'icon.png'
-                        });*/
-        return L.marker(latlng);
-        //return L.marker(latlng, {icon: icon})
+                        iconUrl: 'image/icon.png'
+                        });
+        //return L.marker(latlng);
+        return L.marker(latlng, {icon: icon})
     }, 
     onEachFeature: function(f, l) {
         var popUpContent = f.properties.Description;
@@ -119,11 +119,11 @@ var damaged_buildings = new L.geoJson.ajax('damaged_buildings.geojson',{
 
   var overlays = {
     "Damaged Buildings" : markersCluster,
+    "OpenStreetMap": osm,
     /*"Damaged Road" : road_damages,
     "Major Destructions" : major_destructions,*/
     "Village Name":vilname,
-    "VDC":vdc,
-    "OpenStreetMap": osm
+    "VDC":vdc
     //"Transportation":trans,
     //"Rivers":hydro
   }
