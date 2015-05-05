@@ -3,14 +3,15 @@
 	width: 100%;
 	#padding-top: 2px;
 }
-#under-construction{
-	
+#under-construction{	
 	background-color: rgba(245, 233, 243, 0.27);
-	font-size : 40;
-	text-align: center;
 	height:35px;
 	padding-bottom: 5px;
 
+}
+#under-construction > #title{
+	text-align: center;
+	padding-left: 225px;
 }
 #title{
 	font-size: 35px;
@@ -44,6 +45,9 @@
 }
 #download{
 	position:absolute;
-	right: 10px;
+	right: 25px;
 	height: 40px;
+}
+#under-construction > #text{
+	padding-left: 200px;
 }
