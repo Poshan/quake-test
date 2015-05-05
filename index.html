@@ -1,14 +1,43 @@
 <html>
-<title>
-	Post Disaster Maps
-</title>
 <head>
-<link rel = "stylesheet" href = "default-index.css"/>
+  <title>Post Disaster map of Earthquake Affected Districts</title>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <link rel="stylesheet" href = "default.css">
+
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <link rel = "stylesheet" href = "MarkerCluster.Default.css" />
+  <link rel = "stylesheet" href = "leaflet.markercluster.css" />
+  <script src = "leaflet.markercluster-src.js"></script>
+  <script src = "leaflet.ajax.min.js"></script>
+  <script src = "map.js"></script>
 </head>
-<body>
-	<h1 class = "heading-1">Post Disaster Maps</h1>
-	<a href = "index1.html"><img src = "image/sd1.png"></a>
-	<a href = "http://www.esri.com/services/disaster-response/earthquakes/nepal-earthquake-swipe-map"><img src = "image/esri.png"></a>
-	<a href = "http://vision.sdsu.edu/ec2/geoviewer/nepal-kathmandu"><img src = "image/HDMA.png"></a>
+<body onload = "init()">
+  <div id = "container">
+  <div id = "under-construction">
+  <span id = "title">
+    <b>Post-Disaster map of Earthquake Affected Districts</b>
+  </span>
+  <span id = "download">
+    <a href = "http://dos.gov.np/wp-content/uploads/2015/05/maps.rar">
+      <img src = "image/download.png"></img>
+    </a>
+  </span>
+</div>
+  <div id="map"></div>
+  <div id ="bottom-bar">
+    Other Useful Maps..
+    <span id = "esri"><a href = "http://www.esri.com/services/disaster-response/earthquakes/nepal-earthquake-swipe-map"/>
+      <img src = "image/esri-logo.png"style = "padding-top : 5px;"></span></a>
+      <span id = "esri"><a href = "http://vision.sdsu.edu/ec2/geoviewer/nepal-kathmandu">
+      <img src = "image/geoviewer-logo.png"></a></span>
+      <span id = "esri"><a href = "http://kathmandulivinglabs.github.io/quake-maps/">
+      <img src = "image/kll-logo.png"></a></span>
+      <span id = "esri-1"><a href = "http://dos.gov.np/post-disaster-web-map">
+      <img src = "image/attribution-image3.PNG"></a></span>
+      <!--<span><a href = "http:github.com/poshan">Improve this map</a></span>-->
+      
+
+  </div>
+</div>
 </body>
 </html>

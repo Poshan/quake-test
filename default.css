@@ -6,11 +6,14 @@
 #under-construction{
 	
 	background-color: rgba(245, 233, 243, 0.27);
-	font-size : 35;
+	font-size : 40;
 	text-align: center;
 	height:35px;
 	padding-bottom: 5px;
 
+}
+#title{
+	font-size: 35px;
 }
 #map{
 	width:100%;
@@ -22,6 +25,12 @@
 	padding-top: 1px;	
 	#height: 50px;
 }
+#esri-1{
+	position:relative;
+	padding-top: 15px;	
+	padding-left: 92px;
+}
+
 
 #bottom-bar{
 	position: relative;
@@ -32,4 +41,9 @@
 #text-bottom{
 	font-size: 15px;
 	font: sans-serif;
+}
+#download{
+	position:absolute;
+	right: 10px;
+	height: 40px;
 }
