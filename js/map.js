@@ -21,6 +21,9 @@ TO-dos
 2. Add other data (new data)
 3. zoom to full extent
 4. make circle markers instead
+5. fix to a certain zoom level
+6. try to crop the data see the HTC maps
+7. add esri india's link also
 */
 
 

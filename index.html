@@ -10,6 +10,17 @@
   <script src = "js/leaflet.markercluster-src.js"></script>
   <script src = "js/leaflet.ajax.min.js"></script>
   <script src = "js/map.js"></script>
+
+  <!--for tooltip and ui enhanchment-->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( document ).tooltip();
+  });
+  </script>
+
 </head>
 <body onload = "init()">
   <div id = "container">
@@ -17,24 +28,45 @@
   <span id = "title">
     <b>Post-Disaster map of Earthquake Affected Districts</b>
   </span>
-  <span id = "text">Download Maps</span>
+  <!--<span id = "text">Download Maps</span>-->
   <span id = "download">
     <a href = "http://dos.gov.np/wp-content/uploads/2015/05/maps.rar">
-      <img src = "image/download.png"></img>
+      <img src = "image/download.png" title = "Download printable Maps"></img>
     </a>
   </span>
 </div>
   <div id="map"></div>
   <div id ="bottom-bar">
-    Other Useful Maps..
-    <span id = "esri"><a href = "http://www.esri.com/services/disaster-response/earthquakes/nepal-earthquake-swipe-map"/>
-      <img src = "image/esri-logo.png"style = "padding-top : 5px;"></span></a>
-      <span id = "esri"><a href = "http://vision.sdsu.edu/ec2/geoviewer/nepal-kathmandu">
-      <img src = "image/geoviewer-logo.png"></a></span>
-      <span id = "esri"><a href = "http://kathmandulivinglabs.github.io/quake-maps/">
-      <img src = "image/kll-logo.png"></a></span>
-      <span id = "esri-1"><a href = "http://dos.gov.np/post-disaster-web-map">
-      <img src = "image/attribution-image3.PNG"></a></span>
+    <div id = "other-logos">
+      <div id = "esri">
+        <a href = "http://www.esri.com/services/disaster-response/earthquakes/nepal-earthquake-swipe-map"/>
+          <img src = "image/esri-logo.png" style = "padding-top : 5px;" title = "Esri's Swipe Map"/>  
+        </a>
+      </div>
+      
+      <!--Change the link-->
+      <div id = "esri">
+        <a href = "http://www.esri.com/services/disaster-response/earthquakes/nepal-earthquake-swipe-map"/>
+          <img src = "image/esri-india.png" style = "padding-top : 5px;" title = "Esri India's Map"/>
+        </a>
+      </div>
+      
+      <div id = "esri">
+        <a href = "http://vision.sdsu.edu/ec2/geoviewer/nepal-kathmandu">
+          <img src = "image/geoviewer-logo.png" title = "Crowd sourced map By Geoviewer"/>
+        </a>
+      </div>
+      
+      <div id = "esri">
+        <a href = "http://kathmandulivinglabs.github.io/quake-maps/">
+          <img src = "image/kll-logo.png" title = "KathmanduLivingLabs Maps' Portal">
+        </a>
+      </div>
+    </div>
+      
+    <div id = "esri-1"><a href = "http://dos.gov.np/post-disaster-web-map">
+      <img src = "image/attribution-image5.PNG"></a>
+    </div>
       <!--<span><a href = "http:github.com/poshan">Improve this map</a></span>-->
       
 

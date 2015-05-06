@@ -1,13 +1,11 @@
 #container{
 	height: 100%;
 	width: 100%;
-	#padding-top: 2px;
 }
 #under-construction{	
 	background-color: rgba(245, 233, 243, 0.27);
 	height:35px;
 	padding-bottom: 5px;
-
 }
 #under-construction > #title{
 	text-align: center;
@@ -18,24 +16,27 @@
 }
 #map{
 	width:100%;
-	height:80%;	
+	height:79%;	
 }
 
 #esri{
-	position:relative;
-	padding-top: 1px;	
-	#height: 50px;
+	display:inline-block;
 }
 #esri-1{
+	display: inline-block;
 	position:relative;
 	padding-top: 15px;	
-	padding-left: 92px;
+	padding-left: 5px;
+	padding-left: 2px;
+}
+#other-logos{
+	padding-left: 10px;
+	display:inline-block;
 }
 
 
 #bottom-bar{
 	position: relative;
-	height: 80 px;
 	background-color: rgba(255, 185, 244, 0.27);
 }
 
