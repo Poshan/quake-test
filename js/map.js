@@ -23,7 +23,6 @@ TO-dos
 4. make circle markers instead
 5. fix to a certain zoom level
 6. try to crop the data see the HTC maps
-7. add esri india's link also
 */
 
 
@@ -52,10 +51,8 @@ var markersClusterBuildings = L.markerClusterGroup();
 var markersClusterRoad = L.markerClusterGroup(); 
 var markersClusterMajor = L.markerClusterGroup();
 var markersClusterTent = L.markerClusterGroup();      
-  
-var damaged_buildings = new L.GeoJSON.AJAX("data/damaged_buildings.geojson", {
-    pointToLayer: function(feature, latlng) {
-        var icon = L.icon({
+function pointToLayers(f,ll){
+  var icon = L.icon({
                         iconSize: [20, 20],
                         iconAnchor: [13, 27],
                         popupAnchor:  [1, -24],
@@ -63,9 +60,9 @@ var damaged_buildings = new L.GeoJSON.AJAX("data/damaged_buildings.geojson", {
                         });
         //return L.marker(latlng);
         return L.marker(latlng, {icon: icon})
-    }, 
-    onEachFeature: function(f, l) {
-        var popUpContent = f.properties.Description;
+}
+function onEachFeatures(f,l){
+      var popUpContent = f.properties.Description;
       l.bindPopup(L.popup({
           closeOnClick: true,
           closeButton: true,
@@ -74,8 +71,30 @@ var damaged_buildings = new L.GeoJSON.AJAX("data/damaged_buildings.geojson", {
           maxHeight: 500,
           minWidth: 500
       }).setContent(popUpContent));
-    }
+}
+/*testing -testing
+geojson_array = [];
+
+function readdata(data_type){
+  var arr = [];
+  for (var i = 1; i <= 4; i++) {
+    var filename = 'damaged_buildings' + i + '.geojson';
+    // arr.push(filename);
+    var damaged_buildings = new L.GeoJSON.AJAX("data/"+ filename, {
+      pointToLayer: pointToLayers, 
+      onEachFeature: onEachFeatures,
+    });
+    geojson_array.push(damaged_buildings);
+  };
+}
+readdata('buildings');
+*/
+/*working code*/
+var damaged_buildings = new L.GeoJSON.AJAX("data/damaged_buildings.geojson", {
+    pointToLayer: pointToLayers, 
+    onEachFeature: onEachFeatures
 });
+
 var damaged_road = new L.GeoJSON.AJAX("data/damaged_road.geojson", {
     pointToLayer: function(feature, latlng) {
         var icon = L.icon({
@@ -146,24 +165,36 @@ var tent_shelter = new L.GeoJSON.AJAX("data/tent_shelter.geojson", {
       }).setContent(popUpContent));
     }
 });
+
+/*
+geojson_array[3].on('data:loaded', function () {
+    console.log('testing testing');
+    markersClusterBuildings.addLayer(geojson_array[0]).addTo(map);
+
+    markersClusterBuildings.addLayer(geojson_array[1]).addTo(map);
+
+    markersClusterBuildings.addLayer(geojson_array[2]).addTo(map);
+
+    markersClusterBuildings.addLayer(geojson_array[3]).addTo(map);
+    // console.log(markersBar);
+    // map.addLayer(damaged_buildings);
+});
+*/
+/*working code*/
 damaged_buildings.on('data:loaded', function () {
     markersClusterBuildings.addLayer(damaged_buildings).addTo(map);
-    // console.log(markersBar);
     // map.addLayer(damaged_buildings);
 });
 damaged_road.on('data:loaded', function () {
     markersClusterRoad.addLayer(damaged_road);
-    // console.log(markersBar);
     // map.addLayer(damaged_buildings);
 });
 tent_shelter.on('data:loaded', function () {
-    markersClusterTent.addLayer(tent_shelter);
-    // console.log(markersBar);
+    markersClusterTent.addLayer(tent_shelter);;
     // map.addLayer(damaged_buildings);
 });
 major_destruction.on('data:loaded', function () {
     markersClusterMajor.addLayer(damaged_road);
-    // console.log(markersBar);
     // map.addLayer(damaged_buildings);
 });
 //new added ends here
@@ -178,7 +209,7 @@ major_destruction.on('data:loaded', function () {
 
   var overlays = {
     "Building Damages" : markersClusterBuildings,
-  "OpenStreetMap": osm,
+    "OpenStreetMap": osm,
     /*"Damaged Road" : markersClusterRoad,
     "Major Destructions" : markersClusterMajor,
   "Shelter Tents" : markersClusterTent,*/
