@@ -7,11 +7,10 @@ function init (){
   
     osmUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
     mapbox = 'https://{switch:a,b,c,d}.tiles.mapbox.com/v4/mapbox.satellite-kathmandu-20150425-after/{zoom:7}/{x}/{y}.jpg?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q';
-    attribution = 'Map Tiles &copy; CC BY-SA <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> Vector data source: Survey Department, Crowd Sourced Points: Tomnod';
+    
    //map.fitBounds(bounds);
 /*for osm layer*/
     var osm = L.tileLayer(osmUrl, {
-        attribution: attribution,
         doubleClickZoom: true
       });
 
@@ -184,10 +183,11 @@ major_destruction.on('data:loaded', function () {
     //"Rivers":hydro
   }
   // map.addLayer(damaged_buildings_cluster);
+var attribution = 'Map Tiles &copy; CC BY-SA <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> Vector data source: <a href = "http://www.dos.gov.np">Survey Department</a>, Earthquake Damages Points: <a href = "http://blog.tomnod.com/Nepal-Earthquake-Data-Portal">Tomnod</a>, Data updated on 9th May,2015';
   map.attributionControl.setPrefix('');
   L.control.attribution({
     position: 'bottomright',
-  }).addAttribution('<a>tomnod</a>').setPrefix('').addTo(map);
+  }).addAttribution(attribution).setPrefix('<a href= "http://www.leafletjs.com">leaflet</a>').addTo(map);
 
   L.control.layers(baseLayers,overlays,{collapsed:false}).addTo(map);
   
