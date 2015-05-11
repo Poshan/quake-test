@@ -5,7 +5,6 @@
         zoomInTitle: 'Zoom in',
         zoomOutText: '-',
         zoomOutTitle: 'Zoom out',
-        // zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
         zoomHomeText: '<img src = "image/MapFullExtent.png"/>',
         zoomHomeTitle: 'Zoom Full'
     },
