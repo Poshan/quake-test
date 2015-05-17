@@ -13,7 +13,7 @@ function init (){
       doubleClickZoom: true
   });
 
-
+  var ggl = new L.Google();
   var vdc= L.tileLayer.wms('http://202.45.144.203:8080/geoserver/Nepal_Earthquake/wms',{
       layers: 'VDC',
       zoom:7.5,
@@ -117,7 +117,8 @@ function init (){
     "Major Destructions" : markersClusterMajor,
     "Shelter Tents" : markersClusterTent,
     "Village Name":vilname,
-    "VDC":vdc
+    "VDC":vdc,
+    "Google":ggl
     //"Transportation":trans,
     //"Rivers":hydro
   }
